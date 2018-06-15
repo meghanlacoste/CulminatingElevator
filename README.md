@@ -11,15 +11,16 @@ public class Main {
         Elevator myElevator = new  Elevator();
 
         // CREATE ARRAY OF BOOLEANS UP AND DOWN FOR ALL REQUESTS (MAX 20 ITEMS)
-        boolean [] up  = new boolean [19];
+        boolean [] up  = new boolean [20];
 
         // THEN AS THE ELEVATOR TRAVELS UP THE FLOORS (CHECK EACH FLOOR INBETWEEN
         // THE CURRFLOOR AND REQUEST TO SEE IF THERE ARE UP OR DOWN REQUESTS) CHECK TO SEE IF THE REQUESTS ARE
         // IN THE SAME DIRECTION. GO TO THE FLOOR CLOSEST FIRST SO IF THERE IS A NEXT
         // FLOOR REQUEST AT THAT FLOOR OR FUTURE ONE IN THE SAME DIRECTION STOP.
 
-        int [] floor = new int [19];
-        // MAYBE have the current floor be data at floor [0] and then order any requests into the array like adding to the frequency of the value  Data[dataItem] += 1;
+        int [] floor = new int [20];
+        // MAYBE have the current floor be data at floor [0] and then order any requests into the array like adding to
+        // the frequency of the value  Data[dataItem] += 1;
 
 
         //create NEW ARRAY from 1 - 4
@@ -66,8 +67,10 @@ public class Main {
 
 // sets up or down button option
         //    WHILE boolean direction is not up or down
-        while (!direction){
-            System.out.print("\nSelect 'U' to go up, Select 'D' to go down\n");
+       /*
+       while (!direction){
+
+         System.out.print("\nSelect 'U' to go up, Select 'D' to go down\n");
 
             Scanner scanSystemDirection =new Scanner(System.in);
             userInput= scanSystemDirection.next();
@@ -94,6 +97,10 @@ public class Main {
         }// END WHILE(direction!=true)
 
 
+        */
+
+       // THIS IS THE INITIAL REQUEST FOR AN ELEVATOR
+
         while (!currentFloor){
             //  - Request current floor from user
             System.out.print("\nEnter your current floor\n");
@@ -105,8 +112,8 @@ public class Main {
 
                 if (currentFloorNumb <=20 && currentFloorNumb >=1){
 
-                 //**** SHOULD I SEPARATE CURRENT FLOOR AND REQUEST FLOOR ARRAYS & HOW DO I IMPLEMENT THIS IN THE ELEVATOR CLASS
-                    floor[currentFloorNumb]+=1;
+
+                    myElevator.addNewDataItem(currentFloorNumb);
                  // myElevator.setCurrentFloor(currentFloorNumb);
 
                   System.out.print("\ncurrent floor: " + currentFloorNumb +"\n");
@@ -134,6 +141,11 @@ public class Main {
 
         //WHILE userMode !(in admin mode)
 
+
+        if (myElevator.getCurrentFloor()== currentFloorNumb){
+
+
+
         while (!userMode){
 
             //  IF in service (not at current floor)THEN
@@ -150,9 +162,10 @@ public class Main {
                     requestFloorNumb = scanSystemRfloor.nextInt();
 
                     if (requestFloorNumb <= 20 && requestFloorNumb >= 1) {
-                            
+
                         floor[requestFloorNumb] +=1;
-                     
+
+
                         //   myElevator.setNextFloor(requestFloorNumb);
 
                         System.out.print("\nrequested floor: " + requestFloorNumb +"\n");
@@ -183,7 +196,7 @@ public class Main {
         } // End while(!usermode)
 
 
-
+        }// end if  if (myElevator.getCurrentFloor()== currentFloorNumb){
 
 //if the unit is given its current floor number it should immediately exit admin mode and return to user service
 
@@ -192,7 +205,7 @@ public class Main {
 // this is the procedure for user mode
 
 
-              if (userMode && (up[currentFloorNumb] = true) ){
+             // if (userMode && (up[currentFloorNumb] = true) ){
 
 
              // - Determine the elevator which should be sent by calling on the elevator class for the separate
@@ -200,62 +213,97 @@ public class Main {
       //  above current floor and going down)and is on a floor closest to the current floor.
 
       //  IF the elevator has reached the current floor
-        if (myElevator.getCurrentFloor() == myElevator.getNextFloor()){
+
+     //   if (myElevator.getCurrentFloor() == myElevator.getNextFloor()){
             //   -set elevator start position to current floor
-        }
+       // }
 
 
 
+        if (myElevator.getCurrentFloor()== currentFloorNumb) {
+            while (!floorRequest) {
 
-        while (!floorRequest) {
+                System.out.print("\n Select Desired Floor\n");
+                Scanner scanSystemRfloor = new Scanner(System.in);
 
-            System.out.print("\n Select Desired Floor\n");
-            Scanner scanSystemRfloor = new Scanner(System.in);
+                if (scanSystemRfloor.hasNextInt()) {
 
-            if (scanSystemRfloor.hasNextInt()) {
+                    requestFloorNumb = scanSystemRfloor.nextInt();
 
-                requestFloorNumb = scanSystemRfloor.nextInt();
+                    if (requestFloorNumb <= 20 && requestFloorNumb >= 1 && requestFloorNumb != currentFloorNumb) {
 
-                if (requestFloorNumb <= 20 && requestFloorNumb >= 1 && requestFloorNumb!= currentFloorNumb) {
+                        if (requestFloorNumb > currentFloorNumb) {
+                            System.out.print("\n\ndirection: up\n\n");
+                            up[currentFloorNumb] = true;
+                            myElevator.setDirection(up[currentFloorNumb]);
 
-                if (requestFloorNumb > currentFloorNumb){
-                    System.out.print("\n\nswitching direction to up\n\n");
-                    up [currentFloorNumb]= true;
-                    break;
+
+                            myElevator.addNewDataItem(requestFloorNumb);
+                            myElevator.setCurrentFloor(1 + currentFloorNumb);
+
+                            System.out.print("\nTEST current floor " + myElevator.getCurrentFloor());
+
+
+                          //  myElevator.setNextFloor(requestFloorNumb);
+
+                            System.out.print("\nrequested floor: " + requestFloorNumb + "\n");
+
+                            floorRequest = true;
+
+
+
+                        } else {
+
+                            System.out.print("\n\ndirection: down\n\n");
+                            up[currentFloorNumb] = false;
+                            myElevator.setDirection(up[currentFloorNumb]);
+                            myElevator.addNewDataItem(requestFloorNumb);
+                            myElevator.setCurrentFloor(currentFloorNumb - 1);
+
+                          //  myElevator.setNextFloor(requestFloorNumb);
+
+                            System.out.print("\nrequested floor: " + requestFloorNumb + "\n");
+
+                            floorRequest = true;
+
+
+
+                            //IF other request between current floor and floor request
+                            //         - store floor request but send elevator to other request first
+                            //        ENDIF
+                            // ELSE
+                            //          - send elevator to requested floor
+
+                        }
+
+                    } else {
+                        System.out.print("\nThat is not a valid floor, try again \n");
+
+                    }
 
                 } else {
 
-                    myElevator.setNextFloor(requestFloorNumb);
-
-                    System.out.print("\nrequested floor: " + requestFloorNumb + "\n");
-
-                    floorRequest = true;
-
-                    //IF other request between current floor and floor request
-                    //         - store floor request but send elevator to other request first
-                    //        ENDIF
-                    // ELSE
-                    //          - send elevator to requested floor
-
+                    System.out.print("\nThat is not a valid integer, try again \n");
                 }
+            } //  ENDWHILE
 
-                } else {
-                    System.out.print("\nThat is not a valid floor, try again \n");
 
-                }
+        } // end if (myElevator.getCurrentFloor()== currentFloorNumb)
 
-            } else {
 
-                System.out.print("\nThat is not a valid integer, try again \n");
-            }
-        } //  ENDWHILE
 
-        } // end if user mode and up
+
+
+
+
+
+
+     //   } // end if user mode and up
 
         // IF IN USER MODE AND REQUEST DOWNWARDS
+        /*
         if (userMode && (up [currentFloorNumb]= false)){
-
-            // - Determine the elevator which should be sent by calling on the elevator class for the separate
+         // - Determine the elevator which should be sent by calling on the elevator class for the separate
             // indexes.Select an elevator which is going in the same direction (below current floor and going up or
             //  above current floor and going down)and is on a floor closest to the current floor.
 
@@ -307,14 +355,13 @@ public class Main {
                     System.out.print("\nThat is not a valid integer, try again \n");
                 }
             } //  ENDWHILE
+            } // end if user mode and down
+         */
 
-
-
-
-        }// end if user mode and down
 
 
 
 
     }// end main method
 } // end main class
+
