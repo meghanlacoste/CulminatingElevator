@@ -86,17 +86,27 @@ public class Elevator {
 
 
         if (getDirection()== true) {
+            
+            do {
+            elevatorfloor++;
+           } while (floor[elevatorFloor] == 0);
 
-            while (floor[elevatorFloor] == 0) {
-                elevatorFloor++;
-            }
+
+           // while (floor[elevatorFloor] == 0) {
+          //      elevatorFloor++;
+          //  }
 
         if (getDirection()==false)
+                
+                
+            do {
+            elevatorfloor++;
+           } while (floor[elevatorFloor] == 0);
+               
+               //while (floor[elevatorFloor] == 0) {
+               //    elevatorFloor--;
 
-                while (floor[elevatorFloor] == 0) {
-                    elevatorFloor--;
-
-                    }
+               //     }
 
 
         }
