@@ -301,9 +301,6 @@ public class Main {
 
                         while (myElevator.getCurrentFloor() == currentFloorNumb || myElevator.getCurrentFloor() == requestFloorNumb) {
 
-
-                            while (!floorRequest) {
-
                                 while (!completeRequest) {
                                     System.out.print("\n Select Desired Floor\n");
                                     Scanner scanSystemRfloor = new Scanner(System.in);
@@ -331,7 +328,7 @@ public class Main {
                                                 myElevator.removeDataItem(myElevator.getCurrentFloor());
 
 
-                                                floorRequest = true;
+                                               
 
 
                                             } else {
@@ -357,7 +354,7 @@ public class Main {
 
                                                 myElevator.removeDataItem(myElevator.getCurrentFloor());
 
-                                                floorRequest = true;
+                                       
 
 
 
@@ -389,7 +386,7 @@ public class Main {
                                 } //  end while (!completeRequest)
 
 
-                            }// end (!floorrequest)
+                     
 
                         }// end while (myElevator.getCurrentFloor() == currentFloorNumb || myElevator.getCurrentFloor()== requestFloorNumb )
 
