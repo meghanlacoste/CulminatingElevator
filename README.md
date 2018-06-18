@@ -15,15 +15,15 @@ public class Elevator {
 
     private boolean up = true;
     private boolean userMode = true;
-    int nextFloor = 1;
     private int currentFloor = 1;
 
 
 
-    int [] floor = new int [20];
+    int [] floor = new int [21];
 
     //create array of objects
     //ID number would be the index of the array
+
 
 
     public void addNewDataItem ( int floorNum){
@@ -44,6 +44,14 @@ public class Elevator {
 
 
         }
+
+
+    }
+
+    public void removeDataItem(int floorNum){
+
+        floor[floorNum]-= 1;
+        System.out.print("\n/////////////////// FREQUENCY " + floorNum + " " + floor[floorNum] + "\n");
 
 
     }
@@ -73,34 +81,26 @@ public class Elevator {
 
     public void setCurrentFloor (int elevatorFloor) {
 
-        if (getDirection()) {
+        System.out.print("\nint elevatorFloor " + elevatorFloor );
+        System.out.print("\nfloor[elevatorFloor] =" + floor[elevatorFloor]);
 
-            // for (currentFloor= (MINFLOOR + 1) ; currentFloor < MAXFLOOR; currentFloor++){
 
+        if (getDirection()== true) {
 
             while (floor[elevatorFloor] == 0) {
                 elevatorFloor++;
-                if (floor[elevatorFloor]>0){
-                    break;
-                }
             }
 
+        if (getDirection()==false)
 
+                while (floor[elevatorFloor] == 0) {
+                    elevatorFloor--;
 
-        } else {
-
-            while (floor[elevatorFloor] == 0) {
-                elevatorFloor--;
-                if (floor[elevatorFloor]>0){
-                    break;
-                }
-            }
+                    }
 
 
         }
         currentFloor = elevatorFloor;
-        System.out.print("\nelevat floor " + elevatorFloor);
-        System.out.print("\n curr floor " + currentFloor);
     }
 
     public int getCurrentFloor (){
@@ -108,21 +108,6 @@ public class Elevator {
 
     }
 
-
-
-    public void setNextFloor (int nextFloor){
-
-        if (getDirection()){
-
-        }
-
-    }
-
-    public int getNextFloor (){
-        return nextFloor;
-    }
-
-
-
-
 }// end Elevator Class
+
+
