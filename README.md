@@ -226,7 +226,9 @@ public class Main {
 
 
                                myElevator.addNewDataItem(requestFloorNumb);
-                               myElevator.setCurrentFloor(1 + currentFloorNumb);
+                                // myElevator.setCurrentFloor(1 + currentFloorNumb);
+                               
+                               myElevator.setCurrentFloor(currentFloorNumb);
 
                                System.out.print("\nTEST current floor " + myElevator.getCurrentFloor());
 
@@ -244,7 +246,8 @@ public class Main {
                                up[currentFloorNumb] = false;
                                myElevator.setDirection(up[currentFloorNumb]);
                                myElevator.addNewDataItem(requestFloorNumb);
-                               myElevator.setCurrentFloor(currentFloorNumb - 1);
+                             //  myElevator.setCurrentFloor(currentFloorNumb - 1);
+                              myElevator.setCurrentFloor(currentFloorNumb);
 
                                //  myElevator.setNextFloor(requestFloorNumb);
 
